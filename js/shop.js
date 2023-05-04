@@ -1,5 +1,5 @@
-let sneakerCarrito = localStorage.getItem("sneakers-en-carrito")
-sneakerCarrito = JSON.parse(sneakerCarrito)
+let sneakerCarrito = JSON.parse(localStorage.getItem("sneakers-en-carrito"))
+
 
 const carritoVacio = document.querySelector("#carrito-vacio")
 const carritoSneakers = document.querySelector("#carrito-sneakers")

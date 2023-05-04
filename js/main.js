@@ -38,11 +38,11 @@ function actualizarBotones() {
 
 
 let carrito
-let sneakerCarritoLS = localStorage.getItem("sneakers-en-carrito")
+let sneakerCarritoLS = JSON.parse(localStorage.getItem("sneakers-en-carrito"))
 
 
 if (sneakerCarritoLS) {
-     carrito = JSON.parse(sneakerCarritoLS)
+     carrito = sneakerCarritoLS
      numerosube()
 }else {
     carrito = []
