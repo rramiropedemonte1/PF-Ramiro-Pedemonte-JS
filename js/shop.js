@@ -1,17 +1,83 @@
-const carrito = JSON.parse(localStorage.getItem("nuevo-carrito"))
+let sneakerCarrito = localStorage.getItem("sneakers-en-carrito")
+sneakerCarrito = JSON.parse(sneakerCarrito)
 
 const carritoVacio = document.querySelector("#carrito-vacio")
-const contenedorProductos = document.querySelector("#carrito-sneakers")
+const carritoSneakers = document.querySelector("#carrito-sneakers")
 const carritoAcciones = document.querySelector("#carrito-acciones")
+let eliminar = document.querySelectorAll(".carrito-producto-eliminar")
 
-if (carrito) {
+function cargarSneakersCarrito() {
+    if (sneakerCarrito) {
     carritoVacio.classList.add("disabled")
+    carritoSneakers.classList.remove("disabled")
+    carritoAcciones.classList.remove("disabled")  
+    
 
-    contenedorProductos.classList.remove("disabled")
+    carritoSneakers.innerHTML = ""
+    
+    sneakerCarrito.forEach(sneaker => {
+    const div = document.createElement("div")
+    div.classList.add("carrito-producto")
+    div.innerHTML = `     
+           <img class="carrito-producto-imagen" src="${sneaker.imagen}" alt="">
+    <div class="carrito-producto-titulo">
+        <small>Nombre</small>
+        <h3>${sneaker.nombre}</h3>
+    </div>
+    <div class="carrito-producto-cantidad">
+        <small>Cantidad</small>
+        <p>${sneaker.cantidad}</p>
 
-    carritoAcciones.classList.remove("disabled")
+    </div>
+    <div class="carrito-producto-precio">
+        <small>Precio</small>
+        <p>$${sneaker.precio}</p>
+    </div>
+    <div class="carrito-producto-subtotal">
+        <small>Subtotal</small>
+        <p>$${sneaker.precio * sneaker.cantidad}</p>
+    </div>
+    <button class="carrito-producto-eliminar" id="${sneaker.id}"><i class="bi bi-trash-fill"></i></button>`
+
+    carritoSneakers.append(div)
+
+    });
+    
 
 
-}else {
+} else{
+    carritoVacio.classList.remove("disabled")
+    carritoSneakers.classList.add("disabled")
+    carritoAcciones.classList.add("disabled") 
+}
+
+
+botonEliminar()
+
+
+}
+
+
+cargarSneakersCarrito()
+
+
+
+function botonEliminar() {
+    eliminar = document.querySelectorAll(".carrito-producto-eliminar")
+
+    eliminar.forEach(boton => {
+        boton.addEventListener("click", eliminarSneaker)
+    });
+}
+
+
+
+function eliminarSneaker(e) {
+    const idbutton = e.currentTarget.id
+    const findIndex = sneakerCarrito.findIndex(sneaker => sneaker.id == idbutton)
+    sneakerCarrito.splice(findIndex, 1)
+    cargarSneakersCarrito()
+
+    localStorage.setItem("sneakers-en-carrito", JSON.stringify (sneakerCarrito))
 
 }
