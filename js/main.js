@@ -3,6 +3,9 @@ let botonesAgregar = document.querySelectorAll(".producto-agregar")
 const numero = document.querySelector("#numero")
 
 
+
+
+
 function mostrarProductos() {
     sneakers.forEach(sneaker => {
         const div = document.createElement("div")
@@ -40,12 +43,11 @@ function actualizarBotones() {
 let carrito
 let sneakerCarritoLS = JSON.parse(localStorage.getItem("sneakers-en-carrito"))
 
-
 if (sneakerCarritoLS) {
-     carrito = sneakerCarritoLS
-     numerosube()
+    carrito = sneakerCarritoLS
+    numerosube()
 }else {
-    carrito = []
+   carrito = []
 }
 
 
@@ -61,14 +63,15 @@ function agregarAlCarrito(e) {
         carrito.push(sneakerAgregado)
     }
     numerosube()
+    console.log(carrito)
 
     localStorage.setItem("sneakers-en-carrito", JSON.stringify(carrito))
     
 
 }
 
+
 function numerosube() {
     let number = carrito.reduce((acc, sneaker) => acc + sneaker.cantidad, 0)
     numero.innerText = number
 }
-

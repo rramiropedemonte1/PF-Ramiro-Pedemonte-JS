@@ -5,6 +5,7 @@ const carritoVacio = document.querySelector("#carrito-vacio")
 const carritoSneakers = document.querySelector("#carrito-sneakers")
 const carritoAcciones = document.querySelector("#carrito-acciones")
 let eliminar = document.querySelectorAll(".carrito-producto-eliminar")
+const eliminarCarritoBoton = document.querySelector("#carrito-acciones-vaciar")
 
 function cargarSneakersCarrito() {
     if (sneakerCarrito) {
@@ -46,9 +47,11 @@ function cargarSneakersCarrito() {
 
 
 } else{
+
     carritoVacio.classList.remove("disabled")
     carritoSneakers.classList.add("disabled")
     carritoAcciones.classList.add("disabled") 
+
 }
 
 
@@ -73,11 +76,22 @@ function botonEliminar() {
 
 
 function eliminarSneaker(e) {
-    const idbutton = e.currentTarget.id
-    const findIndex = sneakerCarrito.findIndex(sneaker => sneaker.id == idbutton)
+    const idBoton = e.currentTarget.id
+    const findIndex = sneakerCarrito.findIndex(sneaker => sneaker.id == idBoton)
     sneakerCarrito.splice(findIndex, 1)
     cargarSneakersCarrito()
 
     localStorage.setItem("sneakers-en-carrito", JSON.stringify (sneakerCarrito))
-
 }
+
+
+
+eliminarCarritoBoton.addEventListener("click", eliminarCarrito)
+
+function eliminarCarrito() {
+    carritoSneakers.length = 0
+    localStorage.setItem("sneakers-en-carrito", JSON.stringify(sneakerCarrito))
+    cargarSneakersCarrito()
+}
+
+console.log(eliminarCarritoBoton)
