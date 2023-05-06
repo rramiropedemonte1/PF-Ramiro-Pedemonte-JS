@@ -136,14 +136,14 @@ strong{
 }
 
 
-.carrito-productos {
+.carrito-sneakers {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
 
 }
 
-.carrito-producto{
+.carrito-sneaker{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -154,7 +154,7 @@ strong{
 }
 
 
-.carrito-producto-imagen{
+.carrito-sneaker-imagen{
     width: 9rem;
     border-radius: 1rem;
 }
@@ -165,7 +165,7 @@ strong{
 }
 
 
-.carrito-producto-eliminar{
+.sneaker-eliminar{
     border: 0;
     background-color: transparent;
     color: rgba(255, 0, 0, 0.76);
