@@ -68,6 +68,31 @@ totalActualizado()
 
 cargarSneakersCarrito()
 
+SneakerComprar.addEventListener("click", () =>{
+     Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Gracias por su compra, disfrute de sus sneakers',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      eliminarCarrito()
+})
+
+
+function comprarCarrito() {
+    sneakerCarrito.length = 0
+    localStorage.setItem("sneakers-en-carrito", JSON.stringify(sneakerCarrito))
+}
+
+
+
+
+function totalActualizado() {
+    const sneakerTotal = sneakerCarrito.reduce((acc, sneaker) => acc + (sneaker.precio * sneaker.cantidad), 0)
+    total.innerText = `$${sneakerTotal}`
+}
+
 
 
 function botonEliminar() {
@@ -89,38 +114,10 @@ function eliminarSneaker(e) {
 
 eliminarCarritoBoton.addEventListener("click", eliminarCarrito)
 
+
+
 function eliminarCarrito() {
     sneakerCarrito.length = 0
     localStorage.setItem("sneakers-en-carrito", JSON.stringify(sneakerCarrito))
     cargarSneakersCarrito()
-}
-
-
-
-
-
-function totalActualizado() {
-    const sneakerTotal = sneakerCarrito.reduce((acc, sneaker) => acc + (sneaker.precio * sneaker.cantidad), 0)
-    total.innerText = `$${sneakerTotal}`
-}
-
-
-
-
-
-SneakerComprar.addEventListener("click", () =>{
-     Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Gracias por su compra, disfrute de sus sneakers',
-        showConfirmButton: false,
-        timer: 3000
-      })
-      eliminarCarrito()
-})
-
-
-function comprarCarrito() {
-    sneakerCarrito.length = 0
-    localStorage.setItem("sneakers-en-carrito", JSON.stringify(sneakerCarrito))
 }
